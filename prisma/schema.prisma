@@ -6,3 +6,33 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Org {
+  id String @id @default(uuid())
+
+  responsableName String
+  email           String @unique
+  password        String
+  phone           String
+
+  // One-To-One Relation in Prisma 
+  address   Address? @relation(fields: [addressId], references: [id])
+  addressId String   @unique
+
+  @@map("orgs")
+}
+
+model Address {
+  id String @id @default(uuid())
+
+  state        String
+  municipality String
+  neighborhood String
+  street       String
+  number       Int
+  cep          String
+
+  org Org?
+
+  @@map("addresses")
+}
