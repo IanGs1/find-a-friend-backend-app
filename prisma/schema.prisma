@@ -16,8 +16,7 @@ model Org {
   phone           String
 
   // One-To-One Relation in Prisma 
-  address   Address? @relation(fields: [addressId], references: [id])
-  addressId String   @unique
+  address Address?
 
   @@map("orgs")
 }
@@ -32,7 +31,9 @@ model Address {
   number       Int
   cep          String
 
-  org Org?
+  // One-To-One Relation in Prisma 
+  org   Org?   @relation(fields: [orgId], references: [id])
+  orgId String @unique
 
   @@map("addresses")
 }
