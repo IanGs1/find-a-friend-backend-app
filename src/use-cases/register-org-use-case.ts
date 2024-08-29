@@ -3,6 +3,8 @@ import { AddressesRepository } from "@/repositories/addresses-repository";
 
 import { EmailAlreadyInUseError } from "./errors/email-already-in-use-error";
 
+import { hash } from "bcryptjs";
+
 /** Avoiding using ORM things in the Use Case layer */
 interface CreateOrgRequest {
   responsableName: string;
@@ -32,7 +34,12 @@ export class RegisterOrgUseCase {
       throw new EmailAlreadyInUseError();
     };
 
-    const org = await this.orgsRepository.create(orgData);
+    const passwordHash = await hash(orgData.password, 7);
+
+    const org = await this.orgsRepository.create({
+      ...orgData,
+      password: passwordHash,
+    });
     const address = await this.addressesRepository.create({
       ...addressData,
       orgId: org.id,
