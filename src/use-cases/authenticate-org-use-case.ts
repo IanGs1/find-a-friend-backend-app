@@ -21,7 +21,7 @@ export class AuthenticateOrgUseCase {
     };
 
     const passwordMatch = await compare(password, org.password);
-    if (!passwordMatch) {
+    if (!!passwordMatch) {
       throw new InvalidCredentialsError();
     };
 
