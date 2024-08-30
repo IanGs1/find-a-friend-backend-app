@@ -37,3 +37,71 @@ model Address {
 
   @@map("addresses")
 }
+
+// Enumerable with all Pet's characteristics;
+
+enum PetAge {
+  Puppy
+  Adult
+  Old
+}
+
+enum PetSize {
+  Little
+  Normal
+  Big
+}
+
+enum PetIndependencyLevel {
+  Low
+  Middle
+  High
+}
+
+enum PetSpace {
+  Small
+  Normal
+  Wide
+}
+
+// Enumerable with all Pet's characteristics;
+
+model Pet {
+  id String @id @default(uuid())
+
+  name  String
+  about String
+
+  age               PetAge
+  size              PetSize
+  energy            Int
+  independencyLevel PetIndependencyLevel
+  space             PetSpace
+
+  photos       Photo[]
+  requirements Requirement[]
+
+  @@map("pets")
+}
+
+model Photo {
+  id String @id @default(uuid())
+
+  path String
+
+  Pet   Pet    @relation(fields: [petId], references: [id])
+  petId String
+
+  @@map("photos")
+}
+
+model Requirement {
+  id String @id @default(uuid())
+
+  name String
+
+  pet   Pet    @relation(fields: [petId], references: [id])
+  petId String
+
+  @@map("requirements")
+}
