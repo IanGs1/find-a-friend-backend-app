@@ -46,10 +46,12 @@ export class RegisterOrgUseCase {
     });
 
     return {
-      ...org,
-      address: {
-        ...address,
-      },
+      org: {
+        ...org,
+        address: {
+          ...address,
+        },
+      }
     };
   };
 };
