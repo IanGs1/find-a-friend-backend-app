@@ -17,6 +17,7 @@ model Org {
 
   // One-To-One Relation in Prisma 
   address Address?
+  Pet     Pet[]
 
   @@map("orgs")
 }
@@ -80,6 +81,9 @@ model Pet {
 
   photos       Photo[]
   requirements Requirement[]
+
+  org   Org    @relation(fields: [orgId], references: [id])
+  orgId String
 
   @@map("pets")
 }
