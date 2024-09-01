@@ -5,15 +5,15 @@ import { OrgsRepository } from "@/repositories/orgs-repository";
 import { OrgNotFoundError } from "./errors/org-not-found-error";
 
 interface RegisterPetUseCaseRequest {
-  name: string
-  about: string
-  age: "Puppy" | "Adult" | "Old"
-  size: "Little" | "Normal" | "Big"
-  energy: number
-  independencyLevel: "Low" | "Middle" | "High"
-  space: "Normal" | "Small" | "Wide"
-  orgId: string,
-  requirements: string[],
+  name: string;
+  about: string;
+  age: "Puppy" | "Adult" | "Old";
+  size: "Little" | "Normal" | "Big";
+  energy: number;
+  independencyLevel: "Low" | "Middle" | "High";
+  space: "Normal" | "Small" | "Wide";
+  orgId: string;
+  requirements: string[];
 };
 
 interface CreateRequirementResponse {
