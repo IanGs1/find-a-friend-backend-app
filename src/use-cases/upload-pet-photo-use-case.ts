@@ -19,7 +19,8 @@ export class UploadPetPhotosUseCase {
   ) {};
 
   async execute({ petId, file }: UploadPetPhotosUseCaseRequest) {
-    const pet = this.petsRepository.findById(petId);
+    const pet = await this.petsRepository.findById(petId);
+    console.log(pet);
     if (!pet) {
       throw new PetNotFoundError();
     };
