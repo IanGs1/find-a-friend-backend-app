@@ -17,4 +17,10 @@ export class InMemoryAddressesRepository implements AddressesRepository {
 
     return address;
   };
+
+  async filterByState(state: string) {
+    const addresses = this.addresses.filter(address => address.state === state);
+
+    return addresses;
+  };
 };

@@ -24,4 +24,10 @@ export class InMemoryPetsRepository implements PetsRepository {
 
     return pet;
   };
+
+  async findByOrgId(orgId: string) {
+    const pets = this.pets.filter(pet => pet.orgId === orgId);
+
+    return pets;
+  };
 };
