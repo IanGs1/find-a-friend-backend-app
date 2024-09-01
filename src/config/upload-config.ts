@@ -11,6 +11,7 @@ export const uploadsFolder = path.resolve(tmpFolder, "uploads");
 export const multerConfig = {
   storage: multer.diskStorage({
     destination: tmpFolder,
+    // This funcion is called right after the upload, so, in request.file object the filename is already this one;
     filename: (_, file, callback) => {
       const filenameHash = crypto.randomBytes(7).toString("hex");
       const filename = `${filenameHash}-${file.originalname}`;
