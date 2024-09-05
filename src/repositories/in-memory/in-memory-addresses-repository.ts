@@ -23,4 +23,14 @@ export class InMemoryAddressesRepository implements AddressesRepository {
 
     return addresses;
   };
+
+  async findByOrgId(orgId: string) {
+    const addresses = this.addresses.find(address => address.orgId === orgId);
+
+    return addresses;
+  };
+
+  async index() {
+    return this.addresses;
+  };
 };

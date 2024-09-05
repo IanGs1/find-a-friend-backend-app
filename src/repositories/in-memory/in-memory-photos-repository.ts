@@ -23,4 +23,8 @@ export class InMemoryPhotosRepository implements PhotosRepository {
 
     return photo;
   };
+
+  async index() {
+    return this.photos;
+  };
 };

@@ -30,4 +30,8 @@ export class InMemoryOrgsRepository implements OrgsRepository {
 
     return org;
   };
+
+  async index() {
+    return this.orgs;
+  };
 };

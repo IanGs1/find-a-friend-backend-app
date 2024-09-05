@@ -24,4 +24,8 @@ export class InMemoryRequirementsRepository implements RequirementsRepository {
 
     return requirements;
   };
+
+  async index() {
+    return this.requirements;
+  };
 };

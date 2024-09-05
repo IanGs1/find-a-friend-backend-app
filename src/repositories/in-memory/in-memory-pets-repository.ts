@@ -30,4 +30,8 @@ export class InMemoryPetsRepository implements PetsRepository {
 
     return pets;
   };
+
+  async index() {
+    return this.pets;
+  };
 };
