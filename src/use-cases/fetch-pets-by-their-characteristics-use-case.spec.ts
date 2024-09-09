@@ -3,15 +3,33 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { PetsRepository } from "@/repositories/pets-repository";
 import { InMemoryPetsRepository } from "@/repositories/in-memory/in-memory-pets-repository";
 
+import { AddressesRepository } from "@/repositories/addresses-repository";
+import { InMemoryAddressesRepository } from "@/repositories/in-memory/in-memory-addresses-repository";
+
+import { RequirementsRepository } from "@/repositories/requirements-repository";
+import { InMemoryRequirementsRepository } from "@/repositories/in-memory/in-memory-requirements-repository";
+
+import { PhotosRepository } from "@/repositories/photos-repository";
+import { InMemoryPhotosRepository } from "@/repositories/in-memory/in-memory-photos-repository";
+
 import { FetchPetByTheirCharacteristicsUseCase } from "./fetch-pets-by-their-characteristics-use-case";
 
 let petsRepository: PetsRepository;
+let addressesRepository: AddressesRepository
+let requirementsRepository: RequirementsRepository;
+let photosRepository: PhotosRepository;
+
 let sut: FetchPetByTheirCharacteristicsUseCase;
 
 describe("Fetch Pets By Their Characteristics Use-Case", () => {
   beforeEach(() => {
     petsRepository = new InMemoryPetsRepository();
-    sut = new FetchPetByTheirCharacteristicsUseCase(petsRepository);
+
+    addressesRepository = new InMemoryAddressesRepository();
+    requirementsRepository = new InMemoryRequirementsRepository();
+    photosRepository = new InMemoryPhotosRepository();
+
+    sut = new FetchPetByTheirCharacteristicsUseCase(petsRepository, addressesRepository, requirementsRepository, photosRepository);
   });
 
   it("It should be able to fetch a pet by their characteristics", async () => {

@@ -1,4 +1,7 @@
+import { AddressesRepository } from "@/repositories/addresses-repository";
 import { PetsRepository } from "@/repositories/pets-repository";
+import { PhotosRepository } from "@/repositories/photos-repository";
+import { RequirementsRepository } from "@/repositories/requirements-repository";
 
 interface FetchPetByTheirCharacteristicsUseCaseRequest {
   age?: "Puppy" | "Adult" | "Old" ; 
@@ -11,6 +14,9 @@ interface FetchPetByTheirCharacteristicsUseCaseRequest {
 export class FetchPetByTheirCharacteristicsUseCase {
   constructor(
     private petsRepository: PetsRepository,
+    private addressesRepository: AddressesRepository,
+    private requirementsRepository: RequirementsRepository,
+    private photosRepository: PhotosRepository,
   ) {};
 
   async execute({ age, size, energy, independencyLevel, space }: FetchPetByTheirCharacteristicsUseCaseRequest) {
@@ -43,8 +49,26 @@ export class FetchPetByTheirCharacteristicsUseCase {
 
     pets = pets.filter(pet => pet !== undefined);
 
+
+    let requirements = await this.requirementsRepository.index();
+    let photos = await this.photosRepository.index();
+    let addresses = await this.addressesRepository.index();
+
+    const petsWithPhotosAddressesAndRequirements = pets.map(pet => {
+      const petRequirements = requirements.filter(requirement => requirement.petId === pet.id);
+      const petPhotos = photos.filter(photo => photo.petId === pet.id);
+      const [petAddresses] = addresses.filter(address => address.orgId === pet.orgId);
+
+      return {
+        ...pet,
+        address: petAddresses,
+        requirements: petRequirements,
+        photos: petPhotos,
+      };
+    });
+
     return {
-      pets
+      pets: petsWithPhotosAddressesAndRequirements
     };
   };
 }
