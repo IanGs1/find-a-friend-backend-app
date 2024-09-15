@@ -5,4 +5,4 @@ export interface PetsRepository {
   findById(id: string): Promise<Pet | null>;
   findByOrgId(orgId: string): Promise<Pet[] | []>;
   index(): Promise<Pet[]>;
-};
+}

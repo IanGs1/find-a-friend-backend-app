@@ -5,4 +5,4 @@ export interface AddressesRepository {
   filterByState(state: string): Promise<Address[] | []>;
   findByOrgId(orgId: string): Promise<Address | null>;
   index(): Promise<Address[]>;
-};
+}
